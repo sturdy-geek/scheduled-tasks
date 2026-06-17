@@ -2,7 +2,7 @@ from email.mime.text import MIMEText
 import datetime as dt
 import pandas as pd
 import smtplib
-import random.
+import random
 import os
 ##################### Extra Hard Starting Project ######################
 MY_EMAIL = os.environ.get("MY_EMAIL")
