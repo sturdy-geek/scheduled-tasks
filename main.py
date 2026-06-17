@@ -43,7 +43,7 @@ if today_tuple in birthday_dict:
         contents=letter_file.read()
         contents.replace("[NAME]",birthday_person["name"])
 
-    with smtplib.SMTP("smtp.gmail.com") as connection:
+    with smtplib.SMTP("smtp.gmail.com",587) as connection:
         msg = MIMEText(contents).as_string()
         msg["Subject"]=f"Happy Birthday , {birthday_person["name"]}"
         msg["From"]=MY_EMAIL
