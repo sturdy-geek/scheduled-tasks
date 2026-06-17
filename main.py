@@ -2,10 +2,11 @@ from email.mime.text import MIMEText
 import datetime as dt
 import pandas as pd
 import smtplib
-import random
+import random.
+import os
 ##################### Extra Hard Starting Project ######################
-PASSWORD = "pvmd obwm bgwx rzys"
-
+MY_EMAIL = os.environ.get("MY_EMAIL")
+MY_PASSWORD = os.environ.get("MY_PASSWORD")
 # 1. Update the birthdays.csv
 
 # 2. Check if today matches a birthday in the birthdays.csv
@@ -30,8 +31,7 @@ PASSWORD = "pvmd obwm bgwx rzys"
 #                 connection.login(user="joshosasigb@gmail.com",password=PASSWORD)
 #                 connection.sendmail(from_addr="joshosasigb@gmail.com",to_addrs=rows["email"],msg=msg.as_string())
 #                 connection.close()
-MY_EMAIL="joshosasigb@gmail.com"
-MY_PASSWORD="pvmd obwm bgwx rzys"
+
 today =  dt.datetime.now()
 today_tuple=(today.month,today.day)
 data=pd.read_csv("birthdays.csv")
@@ -46,8 +46,8 @@ if today_tuple in birthday_dict:
     with smtplib.SMTP("smtp.gmail.com") as connection:
         msg = MIMEText(contents).as_string()
         msg["Subject"]=f"Happy Birthday , {birthday_person["name"]}"
-        msg["From"]="joshosasigb@gmail.com"
-        msg["To"]="jigunbor.2300988@stu.cu.edu.ng"
+        msg["From"]=MY_EMAIL
+        msg["To"]=birthday_person["email"]
         connection.startltls()
         connection.login(MY_EMAIL,MY_PASSWORD)
         connection.sendmail(from_addr=MY_EMAIL,to_addrs=birthday_person["email"],msg=msg)
